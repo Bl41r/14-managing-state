@@ -12,7 +12,9 @@
     return template(article);
   };
 
-  // COMMENT: What does this method do?  What is it's execution path?
+  // COMMENT-DONE: What does this method do?  What is it's execution path?
+  // This function populates the author filter and category filter with
+  // author and category information
   articleView.populateFilters = function() {
     var options,
       template = Handlebars.compile($('#option-template').text());
@@ -37,11 +39,15 @@
     });
   };
 
-  // COMMENT: What does this method do?  What is it's execution path?
+  // COMMENT-DONE: What does this method do?  What is it's execution path?
+  // this method creates an event listener on the filters
+  // when the item in a filter is chosen, this method makes a call
+  // to page with the string '/author/authorname' or '/category/categoryname'
   articleView.handleFilters = function() {
     $('#filters').one('change', 'select', function() {
       var resource = this.id.replace('-filter', '');
-      page('/' + resource + '/' + $(this).val().replace(/\W+/g, '+')); // Replace any/all whitespace with a +
+      page('/' + resource + '/' + $(this).val().replace(/\W+/g, '+'));
+      // Replace any/all whitespace with a +
     });
   };
   // articleView.handleAuthorFilter = function() {
@@ -117,7 +123,10 @@
     $('#article-json').val(JSON.stringify(article) + ',');
   };
 
-  // COMMENT: What does this method do?  What is it's execution path?
+  // COMMENT-DONE: What does this method do?  What is it's execution path?
+  // first we show the articles that are pointed to by the context this code
+  // got called from. Then we call the code to populate filters and handle filters
+  // finally the part of read more or show less.
   articleView.index = function(articles) {
     $('#articles').show().siblings().hide();
 
